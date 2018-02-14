@@ -1,0 +1,147 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <style>
+        .text-gray {
+            color: gray;
+        }
+
+        .p-5 {
+            padding: 5px !important;
+        }
+        .h-46 {
+            height: 46px !important;
+        }
+        .col-md-1,
+        .col-md-2,
+        .col-md-3,
+        .col-md-4,
+        .col-md-5,
+        .col-md-6,
+        .col-md-7,
+        .col-md-8,
+        .col-md-9,
+        .col-md-10,
+        .col-md-11,
+        .col-md-12{
+            display: inline-block !important;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Blizuu</a>
+    <span class="navbar-brand col-sm-10 mr-0">
+        <form action="#" method='post'>
+            {% csrf_token %}
+            {{ form.busqueda }}
+                <span class="navbar-nav col-md-4">
+                    {{ form.orden }}
+                    <button type="submit" class="btn btn-info col-md-4">Buscar</button>
+                </span>
+        </form>
+    </span>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Saved reports</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Current month
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Last quarter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Social engagement
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text"></span>
+                            Year-end sale
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <ul>
+                {% for repository in object_list %}
+                    <li class="col-md-12 d-block py-4 border-bottom" i>
+                        <div class="col-md-11">
+                            <h3>
+                                <a href="{{ repository.html_url }}">
+                                    {{ repository.name }}
+                                </a>
+                            </h3>
+                        </div>
+                        <div>
+                            <p class="col-md-12 d-inline-block text-gray mb-2 pr-4" itemprop="description">
+                                <span class="badge badge-warning">{{ repository.language }}</span>
+                                📖 {{ repository.description }}
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <div>
+                                <strong>Fecha de creación: </strong> {{ repository.created_at }}
+                            </div>
+                            <div>
+                                <strong>Fecha de ultimo commit: </strong> {{ repository.pushed_at }}
+                            </div>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script>
+    window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<!-- Icons -->
+<script src="{% static 'js/feather.min.js' %}"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>
