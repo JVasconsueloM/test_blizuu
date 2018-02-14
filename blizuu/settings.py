@@ -67,7 +67,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blizuu.urls'
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -168,7 +167,6 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
 
 # Authenticacion REST
 REST_FRAMEWORK = {

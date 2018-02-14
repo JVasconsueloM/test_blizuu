@@ -19,8 +19,8 @@ class GitHubRepositoriesView(FormView):
     def get_context_data(self, **kwargs):
         context = super(GitHubRepositoriesView, self).get_context_data(**kwargs)
         from apps.comun.utils import QueryGithub
-        git = QueryGithub(sort=self.sort,q=self.q)
-        context['object_list'] = sorted(git.get_repositories(), key=lambda x: x[self.sort], reverse=True)
+        git = QueryGithub(sort=self.sort, q=self.q)
+        context['object_list'] = git.get_repositories()
 
         return context
 
@@ -33,4 +33,3 @@ class GitHubRepositoriesView(FormView):
     def form_valid(self, form):
         self.success_url = build_url('comun:git_repositories_list', params=form.get_params())
         return super(GitHubRepositoriesView, self).form_valid(form)
-
